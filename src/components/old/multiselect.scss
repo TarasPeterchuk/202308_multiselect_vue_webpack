@@ -1,0 +1,131 @@
+.muttiselect {
+  font-family: Inter;
+  position: relative;
+  min-width: 250px;
+}
+
+.muttiselect__element {
+  background-color: #ffffff;
+  min-height: 35px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid #e8e8e8;
+}
+
+.multiselect__field {
+  display: flex;
+  width: 100%;
+  margin: 10px;
+}
+
+.multiselect__label {
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  font-size: 10px;
+  line-height: 10px;
+  padding: 0 10px;
+  border: 1px #3a354199 solid;
+  background-color: #f4f4f4;
+  border-radius: 2px;
+}
+
+.mutliselect__selection {
+  margin-right: 2px;
+}
+
+.mutliselect__selection-text {
+  margin-left: 16px;
+  color: #bdbecd;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.muttiselect__chips {
+  display: flex;
+  gap: 7px;
+}
+.muttiselect__chips-counter {
+  align-items: center;
+  display: flex;
+  white-space: nowrap;
+  color: #bdbecd;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+.mutliselect__chip {
+  padding: 4px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  color: #2693ff;
+  border-radius: 2px;
+  background: rgba(38, 147, 255, 0.3);
+}
+.muttiselect__chip_hidden-chip {
+  display: none;
+}
+
+.mutliselect__chip-text {
+  white-space: nowrap;
+  color: #2693ff;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.mutliselect__append {
+  display: flex;
+  // margin-left: auto;
+  margin-right: 4px;
+}
+
+.mutliselect__clear {
+  display: flex;
+  // margin-left: auto;
+  margin-right: 4px;
+}
+
+.mutliselect__dropdown {
+  position: absolute;
+  max-height: 50vh;
+  z-index: 1;
+  width: 100%;
+  padding: 8px 0;
+  border-radius: 0px 0px 7px 7px;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+  overflow-y: auto;
+  :hover {
+    background-color: #f0f5fc;
+  }
+}
+
+.mutliselect__dropdown-element {
+  display: flex;
+  cursor: pointer;
+  font-size: 12px;
+  align-items: center;
+  padding: 8px 0;
+}
+.mutliselect__dropdown-element-checkbox {
+  margin-left: 14px;
+  color: #2693ff;
+}
+.mutliselect__dropdown-element-title {
+  margin-left: 8px;
+  color: #555d6c;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  // line-height: 12px;
+}
