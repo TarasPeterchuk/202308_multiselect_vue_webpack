@@ -27,12 +27,12 @@ const config = {
   plugins: [
     new VueLoaderPlugin(),
     new CopyWebpackPlugin({
-      // Add the CopyWebpackPlugin configuration
       patterns: [
         {
           from: path.resolve(__dirname, 'public', 'index.html'),
           to: path.resolve(__dirname, 'dist')
-        }
+        },
+        { from: 'src/_redirects', to: '' }
       ]
     })
   ]
