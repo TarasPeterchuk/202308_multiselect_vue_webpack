@@ -3,7 +3,12 @@
     @mousemove="toggleActiveIndex(index)"
     class="mutliselect__dropdown-element"
     :class="{ 'mutliselect__dropdown-element_active': isActive }"
-    @click="toggleSelection(element.value)"
+    @click="
+      () => {
+        toggleSelection(element.value)
+        toggleActiveIndex(index)
+      }
+    "
   >
     <div v-if="multiple" class="mutliselect__dropdown-element-checkbox">
       <input type="checkbox" :checked="value.includes(element.value)" />
