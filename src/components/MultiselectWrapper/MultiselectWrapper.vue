@@ -5,6 +5,7 @@
       :maxVisibleChips="maxVisibleChips"
       :placeholder="placeholder"
       :showDropdown="showDropdown"
+      :search="search"
     />
     <MultiselectDropdown
       v-if="showDropdown"
@@ -22,7 +23,8 @@ import MultiselectDropdown from '../MultiselectDropdown/MultiselectDropdown.vue'
 import {
   InjectionKeyToggleSelection,
   InjectionKeyClearSelection,
-  InjectionKeyToggleDropdown
+  InjectionKeyToggleDropdown,
+  InjectionKeyHandleSearchChange
 } from '../../keys.js'
 
 const props = defineProps({
@@ -90,7 +92,7 @@ const props = defineProps({
 
 let value = props.modelValue ? props.modelValue : props.value
 const showDropdown = ref(false)
-const searchValue = ref('')
+// const searchValue = ref('')
 
 const labels = props.object ? props.items.map((el) => el[props.labelProp]) : props.items
 const values = props.object ? props.items.map((el) => el[props.valueProp]) : props.items
@@ -121,17 +123,35 @@ const selectedItemsFunc = (value) =>
 
 const selectedItems = ref(selectedItemsFunc(value))
 
+function getTextWidth(text, font) {
+  const canvas = document.createElement('canvas')
+  const context = canvas.getContext('2d')
+  context.font = font
+  const metrics = context.measureText(text)
+  return metrics.width
+}
+
 const setVisibleChips = () => {
   const chipsContainer = document.querySelector('.muttiselect__chips')
   const chipsWidth = chipsContainer.offsetWidth
   const fieldContainer = document.querySelector('.multiselect__field-items')
   const fieldWidth = fieldContainer.offsetWidth
-  if (chipsWidth + 50 > fieldWidth && maxVisibleChips.value > 1) {
+  const plusOneLength =
+    maxVisibleChips.value === selectedItems.value.length - 1
+      ? getTextWidth('і ще 1', '500 10px Inter') + 2
+      : 0
+  if (chipsWidth >= fieldWidth && maxVisibleChips.value > 1) {
     maxVisibleChips.value -= 1
   } else if (
-    chipsWidth + 220 <= fieldWidth &&
+    selectedItems.value[maxVisibleChips.value] &&
+    chipsWidth +
+      getTextWidth(selectedItems.value[maxVisibleChips.value].label, '500 10px Inter') -
+      plusOneLength +
+      34 <=
+      fieldWidth &&
     selectedItems.value.length >= maxVisibleChips.value
   ) {
+    // 34 is a number of margings and paddings of chip plus gap sizes
     maxVisibleChips.value += 1
   }
 }
@@ -160,15 +180,20 @@ watch(
 
 const emit = defineEmits(['update:modelValue', 'select', 'change', 'search-change', 'deselect'])
 
-const handleSearchChange = () => {
+const handleSearchChange = (searchValue) => {
   emit('search-change')
   optionElementsSearch.value = optionElements.filter((el) =>
-    el.label.toLowerCase().includes(searchValue.value.toLowerCase())
+    el.label.toLowerCase().includes(searchValue.toLowerCase())
   )
 }
+provide(InjectionKeyHandleSearchChange, handleSearchChange)
 
-const toggleDropdown = () => {
+const toggleDropdown = (event) => {
   if (!props.disabled) {
+    const input = document.querySelector('.mutliselect__search')
+    if (input && showDropdown.value === true && input.contains(event.target)) {
+      return
+    }
     showDropdown.value = !showDropdown.value
   }
 }
@@ -177,6 +202,7 @@ provide(InjectionKeyToggleDropdown, toggleDropdown)
 
 const handleClickOutsideDropdown = (event) => {
   const dropdown = document.querySelector('.mutliselect__dropdown')
+
   if (dropdown && !dropdown.contains(event.target)) {
     showDropdown.value = false
   }

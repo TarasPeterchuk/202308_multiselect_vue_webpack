@@ -6,6 +6,7 @@
         v-model="value"
         :tags="true"
         multiple
+        search
         :disabled="false"
         placeholder="Назва форми"
         :object="true"
@@ -60,7 +61,7 @@ const itemsObjects = [
   { id: '6', name: 'Label 6 some text' }
 ]
 
-const value = ref(['2'])
+const value = ref(['1', '2', '6'])
 
 const handleSelect = (option) => {
   console.log(`event select: ${option}`)

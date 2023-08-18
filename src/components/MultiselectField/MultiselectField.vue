@@ -24,6 +24,14 @@
           : ''
       }}</span>
     </div>
+    <div v-if="search" class="mutliselect__search">
+      <input
+        v-model="searchValue"
+        class="mutliselect__search-input"
+        @input="handleSearchChange(searchValue)"
+        placeholder="search"
+      />
+    </div>
     <div class="mutliselect__clear" @click="clearSelection">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -71,13 +79,20 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
-import { InjectionKeyClearSelection, InjectionKeyToggleDropdown } from '../../keys.js'
+import { inject, ref } from 'vue'
+import {
+  InjectionKeyClearSelection,
+  InjectionKeyToggleDropdown,
+  InjectionKeyHandleSearchChange
+} from '../../keys.js'
 const clearSelection = inject(InjectionKeyClearSelection)
 const toggleDropdown = inject(InjectionKeyToggleDropdown)
+const handleSearchChange = inject(InjectionKeyHandleSearchChange)
 import MultiselectFieldChip from '../MultiselectFieldChip/MultiselectFieldChip.vue'
 
-const { selectedItems, maxVisibleChips, placeholder, tags, showDropdown } = defineProps({
+const searchValue = ref('')
+
+const { selectedItems, maxVisibleChips, placeholder, tags, showDropdown, search } = defineProps({
   selectedItems: {
     type: [Object, Array, String, Number, null],
     default: null
@@ -97,6 +112,10 @@ const { selectedItems, maxVisibleChips, placeholder, tags, showDropdown } = defi
   tags: {
     type: Boolean,
     default: true
+  },
+  search: {
+    type: Boolean,
+    default: false
   },
   showDropdown: {
     type: Boolean,
@@ -164,15 +183,41 @@ const { selectedItems, maxVisibleChips, placeholder, tags, showDropdown } = defi
   font-weight: 500;
   line-height: 20px;
 }
-.mutliselect__append {
+.mutliselect__search {
   display: flex;
-  // margin-left: auto;
-  margin-right: 4px;
+}
+.mutliselect__search-input {
+  border: 1px solid #bdbecd;
+  border-radius: 2px;
+  color: #555d6c;
+  &:focus {
+    outline: none !important;
+    border: 1px solid #bdbecd;
+    border-radius: 2px;
+    box-shadow: 0 0 5px #555d6c;
+  }
 }
 
 .mutliselect__clear {
   display: flex;
   // margin-left: auto;
   margin-right: 4px;
+  path {
+    transition: fill 0.2s;
+  }
+  &:hover path {
+    fill: #555d6c;
+  }
+}
+.mutliselect__append {
+  display: flex;
+  // margin-left: auto;
+  path {
+    transition: fill 0.2s;
+  }
+  margin-right: 4px;
+  &:hover path {
+    fill: #555d6c;
+  }
 }
 </style>
