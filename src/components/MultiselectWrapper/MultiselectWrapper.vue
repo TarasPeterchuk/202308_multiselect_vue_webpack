@@ -92,7 +92,6 @@ const props = defineProps({
 
 let value = props.modelValue ? props.modelValue : props.value
 const showDropdown = ref(false)
-// const searchValue = ref('')
 
 const labels = props.object ? props.items.map((el) => el[props.labelProp]) : props.items
 const values = props.object ? props.items.map((el) => el[props.valueProp]) : props.items
