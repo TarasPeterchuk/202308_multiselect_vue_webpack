@@ -105,6 +105,7 @@ const optionElements = labels
   .filter((el) => (props.hideSelected ? !value.includes(el.value) : true))
 
 const optionElementsSearch = ref(optionElements)
+
 const maxVisibleChips = ref(5)
 
 const selectedItemsFunc = (value) =>

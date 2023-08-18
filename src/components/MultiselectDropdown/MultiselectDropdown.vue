@@ -1,8 +1,5 @@
 <template>
   <div class="mutliselect__dropdown">
-    <!-- <div v-if="search" class="mutliselect__dropdown-input">
-      <input v-model="searchValue" @input="handleSearchChange" />
-    </div> -->
     <MultiselectDropdownElement
       v-for="(element, index) in optionElementsSearch"
       :key="element.label"
@@ -16,7 +13,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref, inject, provide } from 'vue'
+import { onMounted, onUnmounted, ref, inject, provide, watch } from 'vue'
 import { InjectionKeyToggleSelection, InjectionKeyToggleActiveIndex } from '../../keys.js'
 import MultiselectDropdownElement from '../MultiselectDropdownElement/MultiselectDropdownElement.vue'
 const toggleSelection = inject(InjectionKeyToggleSelection)
@@ -37,6 +34,9 @@ const { multiple, optionElementsSearch, value } = defineProps({
 })
 
 const activeIndex = ref(-1)
+watch(optionElementsSearch, (newValue, oldValue) => {
+  console.log('optionElementsSearch changed:', newValue, oldValue)
+})
 
 const handleKeyPress = (event) => {
   switch (event.key) {
