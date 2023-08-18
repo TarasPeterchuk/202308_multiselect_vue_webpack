@@ -24,6 +24,9 @@
           : ''
       }}</span>
     </div>
+    <div v-if="search" class="mutliselect__search">
+      <input v-model="searchValue" @input="handleSearchChange" />
+    </div>
     <div class="mutliselect__clear" @click="clearSelection">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -71,11 +74,13 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 import { InjectionKeyClearSelection, InjectionKeyToggleDropdown } from '../../keys.js'
 const clearSelection = inject(InjectionKeyClearSelection)
 const toggleDropdown = inject(InjectionKeyToggleDropdown)
 import MultiselectFieldChip from '../MultiselectFieldChip/MultiselectFieldChip.vue'
+
+const searchValue = ref('')
 
 const { selectedItems, maxVisibleChips, placeholder, tags, showDropdown } = defineProps({
   selectedItems: {

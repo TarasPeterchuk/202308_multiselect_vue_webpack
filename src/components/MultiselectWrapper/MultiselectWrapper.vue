@@ -5,6 +5,7 @@
       :maxVisibleChips="maxVisibleChips"
       :placeholder="placeholder"
       :showDropdown="showDropdown"
+      :search="search"
     />
     <MultiselectDropdown
       v-if="showDropdown"

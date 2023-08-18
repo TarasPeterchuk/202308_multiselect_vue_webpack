@@ -6,6 +6,7 @@
         v-model="value"
         :tags="true"
         multiple
+        search
         :disabled="false"
         placeholder="Назва форми"
         :object="true"
