@@ -44,7 +44,7 @@ const { element, value, isActive } = defineProps({
   },
   index: {
     type: Number,
-    default: 1
+    default: 12
   }
 })
 </script>
