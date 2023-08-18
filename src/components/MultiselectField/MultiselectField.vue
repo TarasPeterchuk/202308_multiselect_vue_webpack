@@ -92,6 +92,8 @@ import MultiselectFieldChip from '../MultiselectFieldChip/MultiselectFieldChip.v
 
 const searchValue = ref('')
 
+const searchValue = ref('')
+
 const { selectedItems, maxVisibleChips, placeholder, tags, showDropdown, search } = defineProps({
   selectedItems: {
     type: [Object, Array, String, Number, null],
