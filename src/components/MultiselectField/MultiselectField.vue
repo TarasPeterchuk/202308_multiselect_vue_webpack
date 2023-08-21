@@ -11,6 +11,7 @@
           :item="item"
           :index="index"
           :maxVisibleChips="maxVisibleChips"
+          :multiple="multiple"
         />
 
         <span v-if="maxVisibleChips < selectedItems.length" class="muttiselect__chips-counter">{{
@@ -18,7 +19,7 @@
           ${selectedItems.length - maxVisibleChips}`
         }}</span>
       </div>
-      <span v-else>{{
+      <span v-else class="muttiselect__stringed">{{
         selectedItems.length
           ? selectedItems.reduce((acc, el) => (acc === '' ? el.label : acc + ', ' + el.label), '')
           : ''
@@ -32,7 +33,7 @@
         placeholder="search"
       />
     </div>
-    <div class="mutliselect__clear" @click="clearSelection">
+    <div v-if="multiple" class="mutliselect__clear" @click="clearSelection">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
@@ -92,36 +93,41 @@ import MultiselectFieldChip from '../MultiselectFieldChip/MultiselectFieldChip.v
 
 const searchValue = ref('')
 
-const { selectedItems, maxVisibleChips, placeholder, tags, showDropdown, search } = defineProps({
-  selectedItems: {
-    type: [Object, Array, String, Number, null],
-    default: null
-  },
-  maxVisibleChips: {
-    type: [Number, null],
-    default: Number
-  },
-  index: {
-    type: [Number],
-    default: Number
-  },
-  placeholder: {
-    type: String,
-    default: null
-  },
-  tags: {
-    type: Boolean,
-    default: true
-  },
-  search: {
-    type: Boolean,
-    default: false
-  },
-  showDropdown: {
-    type: Boolean,
-    default: true
-  }
-})
+const { selectedItems, maxVisibleChips, placeholder, tags, showDropdown, search, multiple } =
+  defineProps({
+    selectedItems: {
+      type: [Object, Array, String, Number, null],
+      default: null
+    },
+    maxVisibleChips: {
+      type: [Number, null],
+      default: Number
+    },
+    index: {
+      type: [Number],
+      default: Number
+    },
+    placeholder: {
+      type: String,
+      default: null
+    },
+    tags: {
+      type: Boolean,
+      default: true
+    },
+    search: {
+      type: Boolean,
+      default: false
+    },
+    showDropdown: {
+      type: Boolean,
+      default: true
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    }
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -182,6 +188,10 @@ const { selectedItems, maxVisibleChips, placeholder, tags, showDropdown, search 
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+}
+.muttiselect__stringed {
+  color: #555d6c;
+  font-size: 12px;
 }
 .mutliselect__search {
   display: flex;

@@ -6,6 +6,9 @@
       :placeholder="placeholder"
       :showDropdown="showDropdown"
       :search="search"
+      :multiple="multiple"
+      :tags="tags"
+      :hideSelected="true"
     />
     <MultiselectDropdown
       v-if="showDropdown"
@@ -46,7 +49,7 @@ const props = defineProps({
   },
   object: {
     type: Boolean,
-    default: true
+    default: false
   },
   labelProp: {
     type: String,
@@ -93,7 +96,9 @@ const props = defineProps({
 let value = props.modelValue ? props.modelValue : props.value
 const showDropdown = ref(false)
 
-const labels = props.object ? props.items.map((el) => el[props.labelProp]) : props.items
+const labels = props.object
+  ? props.items.map((el) => el[props.labelProp].toString())
+  : props.items.map((el) => el.toString())
 const values = props.object ? props.items.map((el) => el[props.valueProp]) : props.items
 const itemsArray = labels.map((el, index) => ({
   label: el,
@@ -232,7 +237,7 @@ provide(InjectionKeyToggleSelection, toggleSelection)
 
 const clearSelection = (event) => {
   event.stopPropagation()
-  emit('update:modelValue', props.multiple ? [] : null)
+  emit('update:modelValue', props.multiple ? [] : '')
 }
 provide(InjectionKeyClearSelection, clearSelection)
 

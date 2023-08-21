@@ -12,6 +12,7 @@
   >
     <span class="mutliselect__chip-text">{{ item.label }} </span>
     <svg
+      v-if="multiple"
       @click="toggleSelection(item.value)"
       xmlns="http://www.w3.org/2000/svg"
       width="12"
@@ -31,7 +32,7 @@
 import { inject } from 'vue'
 import { InjectionKeyToggleSelection } from '../../keys.js'
 const toggleSelection = inject(InjectionKeyToggleSelection)
-const { item, index, maxVisibleChips } = defineProps({
+const { item, index, maxVisibleChips, multiple } = defineProps({
   item: {
     type: [Object, Array, String, Number, null],
     default: null
@@ -43,6 +44,10 @@ const { item, index, maxVisibleChips } = defineProps({
   index: {
     type: [Number],
     default: Number
+  },
+  multiple: {
+    type: Boolean,
+    default: false
   }
 })
 </script>

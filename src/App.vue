@@ -18,23 +18,21 @@
         @change="handleChange"
       />
     </div>
-    <!-- <div class="element">
+    <div class="element">
       <Multiselect
-        :items="itemsObjects"
-        v-model="value"
-        :tags="true"
-        multiple
+        search
+        :items="itemsArray"
+        v-model="valueItem"
+        :tags="false"
         :disabled="false"
         placeholder="Назва форми"
-        :object="true"
         :hideSelected="false"
-        labelProp="name"
         @select="handleSelect"
         @deselect="handleDeselect"
         @search-change="handleSearchChange"
         @change="handleChange"
       />
-    </div> -->
+    </div>
     <!-- 
       label="-label-"
       search
@@ -62,6 +60,7 @@ const itemsObjects = [
 ]
 
 const value = ref(['1', '2', '6'])
+const valueItem = ref('2')
 
 const handleSelect = (option) => {
   console.log(`event select: ${option}`)
@@ -76,4 +75,8 @@ const handleChange = (newValue, oldValue) => {
   console.log(`event change: new:${newValue}, old:${oldValue}`)
 }
 </script>
-<style></style>
+<style>
+.wrapper {
+  /* display: flex; */
+}
+</style>
