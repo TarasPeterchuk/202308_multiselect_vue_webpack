@@ -239,6 +239,9 @@ const toggleSelection = (item) => {
 provide(InjectionKeyToggleSelection, toggleSelection)
 
 const clearSelection = (event) => {
+  if (props.disabled) {
+    return
+  }
   event.stopPropagation()
   emit('update:modelValue', props.multiple ? [] : '')
 }
