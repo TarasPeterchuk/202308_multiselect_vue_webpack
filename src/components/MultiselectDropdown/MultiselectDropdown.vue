@@ -1,7 +1,7 @@
 <template>
   <div class="mutliselect__dropdown">
     <MultiselectDropdownElement
-      v-for="(element, index) in optionElementsSearch"
+      v-for="(element, index) in props.optionElementsSearch"
       :key="element.label"
       :element="element"
       :value="value"
@@ -13,12 +13,12 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref, inject, provide, watch } from 'vue'
+import { onMounted, onUnmounted, ref, inject, provide, watch, computed } from 'vue'
 import { InjectionKeyToggleSelection, InjectionKeyToggleActiveIndex } from '../../keys.js'
 import MultiselectDropdownElement from '../MultiselectDropdownElement/MultiselectDropdownElement.vue'
 const toggleSelection = inject(InjectionKeyToggleSelection)
 
-const { multiple, optionElementsSearch, value } = defineProps({
+const props = defineProps({
   multiple: {
     type: Boolean,
     default: false
@@ -34,18 +34,22 @@ const { multiple, optionElementsSearch, value } = defineProps({
 })
 
 const activeIndex = ref(-1)
-watch(optionElementsSearch, (newValue, oldValue) => {
-  console.log('optionElementsSearch changed:', newValue, oldValue)
-})
+
+watch(
+  () => props.optionElementsSearch,
+  () => {
+    activeIndex.value = -1
+  }
+)
 
 const handleKeyPress = (event) => {
   switch (event.key) {
     case 'ArrowDown':
       event.preventDefault()
-      if (activeIndex.value <= optionElementsSearch.length - 1) {
+      if (activeIndex.value <= props.optionElementsSearch.length - 1) {
         activeIndex.value++
       }
-      if (activeIndex.value === optionElementsSearch.length) {
+      if (activeIndex.value === props.optionElementsSearch.length) {
         activeIndex.value = 0
       }
       break
@@ -55,14 +59,14 @@ const handleKeyPress = (event) => {
         activeIndex.value--
       }
       if (activeIndex.value === -1) {
-        activeIndex.value = optionElementsSearch.length - 1
+        activeIndex.value = props.optionElementsSearch.length - 1
       }
       break
     case 'Enter':
     case ' ':
       event.preventDefault()
-      if (activeIndex.value >= 0 && activeIndex.value < optionElementsSearch.length) {
-        toggleSelection(optionElementsSearch[activeIndex.value].value)
+      if (activeIndex.value >= 0 && activeIndex.value < props.optionElementsSearch.length) {
+        toggleSelection(props.optionElementsSearch[activeIndex.value].value)
       }
       break
   }
