@@ -27,6 +27,7 @@
     </div>
     <div v-if="search" class="mutliselect__search">
       <input
+        :disabled="disabled"
         v-model="searchValue"
         class="mutliselect__search-input"
         @input="handleSearchChange(searchValue)"
@@ -93,41 +94,53 @@ import MultiselectFieldChip from '../MultiselectFieldChip/MultiselectFieldChip.v
 
 const searchValue = ref('')
 
-const { selectedItems, maxVisibleChips, placeholder, tags, showDropdown, search, multiple } =
-  defineProps({
-    selectedItems: {
-      type: [Object, Array, String, Number, null],
-      default: null
-    },
-    maxVisibleChips: {
-      type: [Number, null],
-      default: Number
-    },
-    index: {
-      type: [Number],
-      default: Number
-    },
-    placeholder: {
-      type: String,
-      default: null
-    },
-    tags: {
-      type: Boolean,
-      default: true
-    },
-    search: {
-      type: Boolean,
-      default: false
-    },
-    showDropdown: {
-      type: Boolean,
-      default: true
-    },
-    multiple: {
-      type: Boolean,
-      default: false
-    }
-  })
+const {
+  selectedItems,
+  maxVisibleChips,
+  placeholder,
+  tags,
+  showDropdown,
+  search,
+  multiple,
+  disabled
+} = defineProps({
+  selectedItems: {
+    type: [Object, Array, String, Number, null],
+    default: null
+  },
+  maxVisibleChips: {
+    type: [Number, null],
+    default: Number
+  },
+  index: {
+    type: [Number],
+    default: Number
+  },
+  placeholder: {
+    type: String,
+    default: null
+  },
+  tags: {
+    type: Boolean,
+    default: true
+  },
+  search: {
+    type: Boolean,
+    default: false
+  },
+  showDropdown: {
+    type: Boolean,
+    default: true
+  },
+  multiple: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  }
+})
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="isVisible"
     @mousemove="toggleActiveIndex(index)"
     class="mutliselect__dropdown-element"
     :class="{ 'mutliselect__dropdown-element_active': isActive }"
@@ -20,12 +21,16 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { inject, computed } from 'vue'
 import { InjectionKeyToggleSelection, InjectionKeyToggleActiveIndex } from '../../keys.js'
 const toggleSelection = inject(InjectionKeyToggleSelection)
 const toggleActiveIndex = inject(InjectionKeyToggleActiveIndex)
 
-const { element, value, isActive } = defineProps({
+const props = defineProps({
+  multiple: {
+    type: Boolean,
+    default: false
+  },
   element: {
     type: [Object, Array, String, Number, null],
     default: () => []
@@ -34,10 +39,6 @@ const { element, value, isActive } = defineProps({
     type: [Object, Array, String, Number, null],
     default: () => []
   },
-  multiple: {
-    type: Boolean,
-    default: false
-  },
   isActive: {
     type: Boolean,
     default: false
@@ -45,8 +46,19 @@ const { element, value, isActive } = defineProps({
   index: {
     type: Number,
     default: 1
+  },
+  hideSelected: {
+    type: Boolean,
+    default: true
   }
 })
+const isVisible = computed(() =>
+  props.hideSelected
+    ? props.multiple
+      ? !props.value.includes(props.element.value)
+      : props.value !== props.element.value
+    : true
+)
 </script>
 
 <style lang="scss" scoped>

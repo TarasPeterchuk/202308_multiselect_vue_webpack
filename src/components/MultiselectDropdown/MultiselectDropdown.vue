@@ -8,6 +8,7 @@
       :index="index"
       :multiple="multiple"
       :isActive="index === activeIndex"
+      :hideSelected="hideSelected"
     />
   </div>
 </template>
@@ -30,6 +31,10 @@ const props = defineProps({
   optionElementsSearch: {
     type: [Object, Array, String, Number, null],
     default: () => []
+  },
+  hideSelected: {
+    type: Boolean,
+    default: true
   }
 })
 

@@ -92,12 +92,12 @@ searchBy:{
     Type: string,
     Default: label
 }
-hideSelected:{
++ hideSelected:{
     //hidden selected options from the option list
     Type: boolean,
     Default: true
 }
-disabled:{
++ disabled:{
     //Disables the multiselect
     Type: boolean,
     Default: false
@@ -112,13 +112,13 @@ label:{
     Type: string,
     Default: null
 }
-placeholder:{
++ placeholder:{
     //Placeholder attribute
     Type: string,
     Default: null
 }
 
-// Events
+// Events +
 @change { 
     //Triggered when the value is changed  
     newValue //the new value

@@ -8,13 +8,14 @@
       :search="search"
       :multiple="multiple"
       :tags="tags"
-      :hideSelected="true"
+      :disabled="disabled"
     />
     <MultiselectDropdown
       v-if="showDropdown"
       :multiple="multiple"
       :optionElementsSearch="optionElementsSearch"
       :value="value"
+      :hideSelected="hideSelected"
     />
   </div>
 </template>
@@ -105,9 +106,8 @@ const itemsArray = labels.map((el, index) => ({
   value: values[index]
 }))
 
-const optionElements = labels
-  .map((el, i) => ({ label: el, value: values[i] }))
-  .filter((el) => (props.hideSelected ? !value.includes(el.value) : true))
+const optionElements = labels.map((el, i) => ({ label: el, value: values[i] }))
+// .filter((el) => (props.hideSelected ? false : !value.includes(el.value)))
 
 const optionElementsSearch = ref(optionElements)
 
@@ -214,6 +214,9 @@ const handleClickOutsideDropdown = (event) => {
 }
 
 const toggleSelection = (item) => {
+  if (props.disabled) {
+    return
+  }
   let newValue = props.multiple ? [] : null
   if (!props.multiple) {
     emit('update:modelValue', item)
