@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref, inject, provide, watch, computed } from 'vue'
+import { onMounted, onUnmounted, ref, inject, provide, watch } from 'vue'
 import { InjectionKeyToggleSelection, InjectionKeyToggleActiveIndex } from '../../keys.js'
 import MultiselectDropdownElement from '../MultiselectDropdownElement/MultiselectDropdownElement.vue'
 const toggleSelection = inject(InjectionKeyToggleSelection)
