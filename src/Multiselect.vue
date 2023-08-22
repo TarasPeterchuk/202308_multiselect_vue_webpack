@@ -191,7 +191,6 @@ const searchValue = ref('')
 
 const handleSearchChange = (searchProp) => {
   searchValue.value = searchProp
-  console.log(searchProp)
   emit('search-change')
   optionElementsSearch.value = optionElements.filter((el) =>
     el.label.toLowerCase().includes(searchProp.toLowerCase())
