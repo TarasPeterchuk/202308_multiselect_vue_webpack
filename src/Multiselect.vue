@@ -175,7 +175,7 @@ watch(
     value = newValue
     selectedItems.value = selectedItemsFunc(newValue)
   }
-)dqw
+)
 
 watch(
   () => props.modelValue,
