@@ -175,7 +175,7 @@ watch(
     value = newValue
     selectedItems.value = selectedItemsFunc(newValue)
   }
-)
+)dqw
 
 watch(
   () => props.modelValue,
@@ -191,6 +191,7 @@ const searchValue = ref('')
 
 const handleSearchChange = (searchProp) => {
   searchValue.value = searchProp
+  console.log(searchProp)
   emit('search-change')
   optionElementsSearch.value = optionElements.filter((el) =>
     el.label.toLowerCase().includes(searchProp.toLowerCase())
