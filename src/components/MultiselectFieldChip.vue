@@ -30,7 +30,7 @@
 
 <script setup>
 import { inject } from 'vue'
-import { InjectionKeyToggleSelection } from '../../keys.js'
+import { InjectionKeyToggleSelection } from '../keys.js'
 const toggleSelection = inject(InjectionKeyToggleSelection)
 const { item, index, maxVisibleChips, multiple } = defineProps({
   item: {

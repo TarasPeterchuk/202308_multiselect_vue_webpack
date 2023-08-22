@@ -86,11 +86,11 @@ import {
   InjectionKeyClearSelection,
   InjectionKeyToggleDropdown,
   InjectionKeyHandleSearchChange
-} from '../../keys.js'
+} from '../keys.js'
 const clearSelection = inject(InjectionKeyClearSelection)
 const toggleDropdown = inject(InjectionKeyToggleDropdown)
 const handleSearchChange = inject(InjectionKeyHandleSearchChange)
-import MultiselectFieldChip from '../MultiselectFieldChip/MultiselectFieldChip.vue'
+import MultiselectFieldChip from './MultiselectFieldChip.vue'
 
 const searchValue = ref('')
 

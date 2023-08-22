@@ -15,9 +15,14 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref, inject, provide, watch } from 'vue'
-import { InjectionKeyToggleSelection, InjectionKeyToggleActiveIndex } from '../../keys.js'
-import MultiselectDropdownElement from '../MultiselectDropdownElement/MultiselectDropdownElement.vue'
+import {
+  InjectionKeyToggleSelection,
+  InjectionKeyToggleActiveIndex,
+  InjectionKeyCloseDropdown
+} from '../keys.js'
+import MultiselectDropdownElement from './MultiselectDropdownElement.vue'
 const toggleSelection = inject(InjectionKeyToggleSelection)
+const closeDropdown = inject(InjectionKeyCloseDropdown)
 
 const props = defineProps({
   multiple: {
@@ -68,11 +73,14 @@ const handleKeyPress = (event) => {
       }
       break
     case 'Enter':
-    case ' ':
       event.preventDefault()
       if (activeIndex.value >= 0 && activeIndex.value < props.optionElementsSearch.length) {
         toggleSelection(props.optionElementsSearch[activeIndex.value].value)
       }
+      break
+    case 'Escape':
+      event.preventDefault()
+      closeDropdown()
       break
   }
 }

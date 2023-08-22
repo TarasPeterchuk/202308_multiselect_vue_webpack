@@ -22,7 +22,7 @@
 
 <script setup>
 import { inject, computed } from 'vue'
-import { InjectionKeyToggleSelection, InjectionKeyToggleActiveIndex } from '../../keys.js'
+import { InjectionKeyToggleSelection, InjectionKeyToggleActiveIndex } from '../keys.js'
 const toggleSelection = inject(InjectionKeyToggleSelection)
 const toggleActiveIndex = inject(InjectionKeyToggleActiveIndex)
 

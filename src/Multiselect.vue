@@ -22,14 +22,15 @@
 
 <script setup>
 import { provide, ref, watch, onMounted, onUnmounted, onUpdated } from 'vue'
-import MultiselectField from '../MultiselectField/MultiselectField.vue'
-import MultiselectDropdown from '../MultiselectDropdown/MultiselectDropdown.vue'
+import MultiselectField from './components/MultiselectField.vue'
+import MultiselectDropdown from './components/MultiselectDropdown.vue'
 import {
   InjectionKeyToggleSelection,
   InjectionKeyClearSelection,
   InjectionKeyToggleDropdown,
+  InjectionKeyCloseDropdown,
   InjectionKeyHandleSearchChange
-} from '../../keys.js'
+} from './keys.js'
 
 const props = defineProps({
   value: {
@@ -202,6 +203,10 @@ const toggleDropdown = (event) => {
     showDropdown.value = !showDropdown.value
   }
 }
+const closeDropdown = () => {
+  showDropdown.value = false
+}
+provide(InjectionKeyCloseDropdown, closeDropdown)
 
 provide(InjectionKeyToggleDropdown, toggleDropdown)
 

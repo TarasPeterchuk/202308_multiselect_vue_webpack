@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="element">
-      <Multiselect
+      <MultiSelect
         :items="itemsObjects"
         v-model="value"
         :tags="true"
@@ -19,7 +19,7 @@
       />
     </div>
     <div class="element">
-      <Multiselect
+      <MultiSelect
         search
         :items="itemsArray"
         v-model="valueItem"
@@ -47,7 +47,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Multiselect from './components/MultiselectWrapper/MultiselectWrapper.vue'
+import MultiSelect from './Multiselect.vue'
 
 const itemsArray = [1, '2', 3]
 const itemsObjects = [
