@@ -187,10 +187,10 @@ watch(
 
 const emit = defineEmits(['update:modelValue', 'select', 'change', 'search-change', 'deselect'])
 
-let searchValue = ''
+const searchValue = ref('')
 
 const handleSearchChange = (searchProp) => {
-  searchValue = searchProp
+  searchValue.value = searchProp
   emit('search-change')
   optionElementsSearch.value = optionElements.filter((el) =>
     el.label.toLowerCase().includes(searchProp.toLowerCase())
