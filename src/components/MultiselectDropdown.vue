@@ -57,7 +57,7 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  searchValueProp: { type: String, default: 'la' }
+  searchValueProp: { type: String, default: '' }
 })
 
 const inputSearchRef = ref(null)
