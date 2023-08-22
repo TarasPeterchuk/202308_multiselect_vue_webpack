@@ -187,7 +187,7 @@ watch(
 
 const emit = defineEmits(['update:modelValue', 'select', 'change', 'search-change', 'deselect'])
 
-const searchValue = ref('la')
+const searchValue = ref('')
 
 const handleSearchChange = (searchProp) => {
   searchValue.value = searchProp

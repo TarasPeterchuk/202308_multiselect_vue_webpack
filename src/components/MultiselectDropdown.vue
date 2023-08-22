@@ -61,7 +61,7 @@ const props = defineProps({
 })
 
 const inputSearchRef = ref(null)
-const searchValue = props.searchValueProp
+const searchValue = ref(props.searchValueProp)
 
 const activeIndex = ref(-1)
 
