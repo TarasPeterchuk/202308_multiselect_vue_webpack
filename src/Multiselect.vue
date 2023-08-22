@@ -5,7 +5,6 @@
       :maxVisibleChips="maxVisibleChips"
       :placeholder="placeholder"
       :showDropdown="showDropdown"
-      :search="search"
       :multiple="multiple"
       :tags="tags"
       :disabled="disabled"
@@ -16,6 +15,8 @@
       :optionElementsSearch="optionElementsSearch"
       :value="value"
       :hideSelected="hideSelected"
+      :search="search"
+      :searchValueProp="searchValue"
     />
   </div>
 </template>
@@ -186,10 +187,13 @@ watch(
 
 const emit = defineEmits(['update:modelValue', 'select', 'change', 'search-change', 'deselect'])
 
-const handleSearchChange = (searchValue) => {
+let searchValue = ''
+
+const handleSearchChange = (searchProp) => {
+  searchValue = searchProp
   emit('search-change')
   optionElementsSearch.value = optionElements.filter((el) =>
-    el.label.toLowerCase().includes(searchValue.toLowerCase())
+    el.label.toLowerCase().includes(searchProp.toLowerCase())
   )
 }
 provide(InjectionKeyHandleSearchChange, handleSearchChange)

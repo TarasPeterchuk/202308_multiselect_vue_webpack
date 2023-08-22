@@ -1,5 +1,14 @@
 <template>
   <div class="mutliselect__dropdown">
+    <div v-if="search" class="mutliselect__search">
+      <input
+        ref="inputSearchRef"
+        v-model="searchValue"
+        class="mutliselect__search-input"
+        @input="handleSearchChange(searchValue)"
+        placeholder="search"
+      />
+    </div>
     <MultiselectDropdownElement
       v-for="(element, index) in props.optionElementsSearch"
       :key="element.label"
@@ -18,11 +27,14 @@ import { onMounted, onUnmounted, ref, inject, provide, watch } from 'vue'
 import {
   InjectionKeyToggleSelection,
   InjectionKeyToggleActiveIndex,
-  InjectionKeyCloseDropdown
+  InjectionKeyCloseDropdown,
+  InjectionKeyHandleSearchChange
 } from '../keys.js'
 import MultiselectDropdownElement from './MultiselectDropdownElement.vue'
+
 const toggleSelection = inject(InjectionKeyToggleSelection)
 const closeDropdown = inject(InjectionKeyCloseDropdown)
+const handleSearchChange = inject(InjectionKeyHandleSearchChange)
 
 const props = defineProps({
   multiple: {
@@ -40,8 +52,16 @@ const props = defineProps({
   hideSelected: {
     type: Boolean,
     default: true
-  }
+  },
+  search: {
+    type: Boolean,
+    default: false
+  },
+  searchValueProp: { type: String, default: '' }
 })
+
+const inputSearchRef = ref(null)
+const searchValue = props.searchValueProp
 
 const activeIndex = ref(-1)
 
@@ -85,6 +105,7 @@ const handleKeyPress = (event) => {
   }
 }
 onMounted(() => {
+  inputSearchRef.value.focus()
   document.addEventListener('keydown', handleKeyPress)
 })
 onUnmounted(() => {
@@ -109,5 +130,19 @@ provide(InjectionKeyToggleActiveIndex, toggleActiveIndex)
   background: #fff;
   overflow-y: auto;
   outline: none;
+}
+.mutliselect__search {
+  display: flex;
+}
+.mutliselect__search-input {
+  border: 1px solid #bdbecd;
+  border-radius: 2px;
+  color: #555d6c;
+  &:focus {
+    outline: none !important;
+    border: 1px solid #bdbecd;
+    border-radius: 2px;
+    box-shadow: 0 0 5px #555d6c;
+  }
 }
 </style>

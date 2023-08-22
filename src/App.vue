@@ -18,7 +18,7 @@
         @change="handleChange"
       />
     </div>
-    <div class="element">
+    <!-- <div class="element">
       <MultiSelect
         search
         :items="itemsArray"
@@ -32,7 +32,7 @@
         @search-change="handleSearchChange"
         @change="handleChange"
       />
-    </div>
+    </div> -->
     <!-- 
       label="-label-"
       search

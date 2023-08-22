@@ -25,7 +25,7 @@
           : ''
       }}</span>
     </div>
-    <div v-if="search" class="mutliselect__search">
+    <!-- <div v-if="search" class="mutliselect__search">
       <input
         :disabled="disabled"
         v-model="searchValue"
@@ -33,7 +33,7 @@
         @input="handleSearchChange(searchValue)"
         placeholder="search"
       />
-    </div>
+    </div> -->
     <div v-if="multiple" class="mutliselect__clear" @click="clearSelection">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -84,15 +84,14 @@
 import { inject, ref } from 'vue'
 import {
   InjectionKeyClearSelection,
-  InjectionKeyToggleDropdown,
-  InjectionKeyHandleSearchChange
+  InjectionKeyToggleDropdown
+  // InjectionKeyHandleSearchChange
 } from '../keys.js'
 const clearSelection = inject(InjectionKeyClearSelection)
 const toggleDropdown = inject(InjectionKeyToggleDropdown)
-const handleSearchChange = inject(InjectionKeyHandleSearchChange)
+// const handleSearchChange = inject(InjectionKeyHandleSearchChange)
 import MultiselectFieldChip from './MultiselectFieldChip.vue'
-
-const searchValue = ref('')
+// const searchValue = ref('')
 
 const {
   selectedItems,
@@ -100,7 +99,7 @@ const {
   placeholder,
   tags,
   showDropdown,
-  search,
+  // search,
   multiple,
   disabled
 } = defineProps({
@@ -124,10 +123,10 @@ const {
     type: Boolean,
     default: true
   },
-  search: {
-    type: Boolean,
-    default: false
-  },
+  // search: {
+  //   type: Boolean,
+  //   default: false
+  // },
   showDropdown: {
     type: Boolean,
     default: true
@@ -206,20 +205,20 @@ const {
   color: #555d6c;
   font-size: 12px;
 }
-.mutliselect__search {
-  display: flex;
-}
-.mutliselect__search-input {
-  border: 1px solid #bdbecd;
-  border-radius: 2px;
-  color: #555d6c;
-  &:focus {
-    outline: none !important;
-    border: 1px solid #bdbecd;
-    border-radius: 2px;
-    box-shadow: 0 0 5px #555d6c;
-  }
-}
+// .mutliselect__search {
+//   display: flex;
+// }
+// .mutliselect__search-input {
+//   border: 1px solid #bdbecd;
+//   border-radius: 2px;
+//   color: #555d6c;
+//   &:focus {
+//     outline: none !important;
+//     border: 1px solid #bdbecd;
+//     border-radius: 2px;
+//     box-shadow: 0 0 5px #555d6c;
+//   }
+// }
 
 .mutliselect__clear {
   display: flex;
